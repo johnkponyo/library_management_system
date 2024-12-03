@@ -6,9 +6,9 @@
 <% //} msg = null; %> -->
 
 <div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-2">
+    <div class="bg-secondary text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between">
-            <h6 class="mb-0">Book Inventory </h6>
+            <h1 class="mb-0">Book Inventory Management</h1>
             <a href="#">Manage: Edit/Delete Books</a>
         </div>
     </div>
@@ -62,14 +62,14 @@
                             <% } else if(book.available === 1){ %>
                             <button class="btn  text-center bg-success text-white" disabled>Available</button>
                             <% } else if(book.available === 2){ %>
-                            <button class="btn text-center bg-secondary text-white" disabled>Coming soon!</button>
+                            <button class="btn text-center bg-info text-white" disabled>Coming soon!</button>
                             <% } %>
                         </td>
                         <td class="align-middle">
-                            <a href="/edit/<%= book.id %>" title="Edit" class="text-warning me-4">
+                            <a href="/edit/<%= book.id %>" title="Edit" class="text-warning me-4" style="font-size: larger;">
                                 <i class="fa fa-edit"></i> 
                             </a>
-                            <a href="#" title="Delete" class="text-danger delete" data-id="<%= book.id %>" >
+                            <a href="#" title="Delete" class="text-danger delete" data-id="<%= book.id %>" style="font-size: larger;" >
                                 <i class="fa fa-trash"></i> 
                             </a>
                         </td>

@@ -12,4 +12,6 @@ router.get('/edit/:id', isAuthenticated, isLibrarian, bookController.edit);
 router.post('/edit/:id', isAuthenticated, isLibrarian, upload.single('cover'), bookController.update);
 router.get('/delete/:id', isAuthenticated, isLibrarian, bookController.delete);
 
+router.get('/borrow/:id/:uid', isAuthenticated, isUser, bookController.borrow)
+
 module.exports = router;

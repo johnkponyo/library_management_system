@@ -150,6 +150,21 @@
                 alert('Deletion aborted!')
             }
         });
+
+        let uid = '<%= user ? user.id : null %>';
+
+        $('.borrow').click(function (e) { 
+            e.preventDefault();
+            let id = $(this).data('id')
+            let route = '/borrow/'+id+'/'+uid
+            // alert(route)
+            if (confirm("Do you wish to borrow this book?")) {
+                location.href = route
+            } else {
+                alert('Aborted!')
+            }
+        });
+
     </script>
     
 </body>

@@ -1,4 +1,5 @@
 const Book = require('../models/bookModel');
+const { HumanFriendlyDate } = require('human-friendly-date');
 
 const bookController = {
     list: (req, res) => {
@@ -54,6 +55,24 @@ const bookController = {
             if (err) throw err;
             res.redirect('/manage');
         });
+    },
+
+    borrow: (req, res) => {
+        const bookID = req.params.id;
+        const userID = req.params.uid
+        const borrowDate = HumanFriendlyDate(Date.now()).formattedDate
+        const returnDate = HumanFriendlyDate(Date.now() + (7 * 24 * 60 * 60 * 1000)).formattedDate;
+
+        console.log(bookID, userID, borrowDate, returnDate)
+
+        Book.setBorrow({bookID, userID, borrowDate, returnDate}, (err) => {
+            Book.updateStatus({bookID, val: 0}, (err) => {
+                if (err) throw err;
+            })
+            if (err) throw err;
+            res.redirect('/');
+        });
+        
     }
 
 };

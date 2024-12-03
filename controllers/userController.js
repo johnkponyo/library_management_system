@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
-const User = require('../models/userModel');
+const User = require('../models/userModel')
+const Book = require('../models/bookModel')
 
 const userController = {
     login: (req, res) => {
@@ -20,10 +21,18 @@ const userController = {
 
     //user
     udashboard: (req, res) => {
-        res.render('users/udashboard', {
-            title: 'Dashboard',
-            user: req.session.user || null
-        });
+        let totalBorrowed = 0
+
+        Book.getTotalBorrowedByUser(req.session.user.id, (err, book) => {
+            if (err) throw err;
+            totalBorrowed = book[0].total_borrowed
+            
+            res.render('users/udashboard', {
+                title: 'Dashboard',
+                user: req.session.user || null,
+                totBorrowed: totalBorrowed
+            });
+        })
     },
 
     authenticate: (req, res) => {
@@ -33,7 +42,6 @@ const userController = {
             if (users.length > 0) {
                 if(bcrypt.compareSync(password, users[0].password)){
                     req.session.user = users[0];
-                        console.log(req.session.user)
                         if(req.session.user.role === 'librarian'){
                             res.redirect('/ldashboard')
                         }else if(req.session.user.role === 'user') {
@@ -71,7 +79,6 @@ const userController = {
                 const hashedPassword = bcrypt.hashSync(password, 10);
                 User.create({ username, password: hashedPassword, role }, (err) => {
                     if (err) throw err;
-                    console.log('User registered!')
                     res.redirect('/login');
                 });
             }

@@ -1,7 +1,87 @@
-<div class="container-fluid pt-4 px-4">
-    <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
-        <div class="col-md-6 text-center">
-            <h3>This is blank page</h3>
+
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Browse Books</h1>
+                <a href="#">Showing All</a>
+            </div>
         </div>
     </div>
-</div>
+    
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary text-center rounded p-4">
+            <div>
+                <table id="DT" class="table display" style="width: 100%;">
+                    <thead>
+                      <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Cover</th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center">Author</th>
+                        <th class="text-center">Genre</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+    
+                        <% 
+                            let count = 1 
+                            books.forEach(book => {
+                        %>
+    
+                        <tr>
+                            <td class="align-middle"><%= count %></td>
+                            <td class="align-middle">
+                                <img src="<%= book.cover %>" alt="Image of <%= book.title %>" style="width: 100%; height: auto; max-width: 100px;">
+                            </td>
+                            <td class="align-middle">
+                                <%= book.title %>
+                            </td>
+                            <td class="align-middle">
+                                <%= book.author %>
+                            </td>
+                            <td class="align-middle">
+                                <%= book.genre %>
+                            </td>
+                            <td class="align-middle">
+                                <textarea class="form-control bg-secondary" style="height: 150px;"disabled >
+                                    <%= book.description %>
+                                </textarea>
+                            </td>
+                            <td class="align-middle">
+                                <% if(book.available === 0){ %>
+                                    <button  class="btn text-center bg-danger text-white" disabled>Unavailable</button>
+                                <% } else if(book.available === 1){ %>
+                                <button class="btn  text-center bg-success text-white" disabled>Available</button>
+                                <% } else if(book.available === 2){ %>
+                                <button class="btn text-center bg-info text-white" disabled>Coming soon!</button>
+                                <% } %>
+                            </td>
+                            
+                                <td class="align-middle">
+                                    <% if(book.available != 0 && book.available != 2){ %>
+                                        <a href="#" title="Borrow this book" class="borrow" style="color: blue; font-size: larger;" data-id="<%= book.id %>" >
+                                            <i class="fa fa-bookmark"></i>
+                                        </a>
+                                    <% } else { %>
+                                        <a href="#" class="borrow" style="color: rgb(23, 1, 1); font-size: larger; pointer-events: none;" data-id="<%= book.id %>">
+                                            <i class="fa fa-lock"></i>
+                                        </a>
+                                    <% } %>
+                                    
+                                </td>
+                        </tr>
+    
+                        <%
+                            count++
+                        });
+                        %>
+                      
+                    </tbody>
+                  </table>
+              
+            </div>
+        </div>
+    </div>

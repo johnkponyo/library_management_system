@@ -1,6 +1,6 @@
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-secondary navbar-dark">
-        <a href="index.html" class="navbar-brand mx-4 mb-3">
+        <a href="#" class="navbar-brand mx-4 mb-3">
             <h3 class="text-primary"><i class="fa fa-book-open me-2"></i>LiBrary</h3>
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
@@ -14,18 +14,32 @@
             </div>
         </div>
         <div class="navbar-nav w-100">
-            <a href="index.html" class="nav-item nav-link active">
-                <i class="fa fa-tachometer-alt me-2"></i>Dashboard
-            </a>
-            <a href="add-book.html" class="nav-item nav-link">
-                <i class="fa fa-plus-square me-2"></i>Add Book
-            </a>
-            <a href="manage-books.html" class="nav-item nav-link">
-                <i class="fa fa-book me-2"></i>Manage Books
-            </a>
-            <a href="txn-history.html" class="nav-item nav-link">
-                <i class="fa fa-history me-2"></i>Transaction History
-            </a>
+            <% if (user.role == 'librarian') { %>
+                <a href="/ldashboard" class="nav-item nav-link <%= title === 'Dashboard' ? 'active' : '' %>">
+                    <i class="fa fa-tachometer-alt me-2"></i>Dashboard
+                </a>
+            <% }else{ %>
+                <a href="/udashboard" class="nav-item nav-link <%= title === 'Dashboard' ? 'active' : '' %>">
+                    <i class="fa fa-tachometer-alt me-2"></i>Dashboard
+                </a>
+            <% } %>
+
+            <% if (user.role == 'librarian') { %>
+                <a href="/add" class="nav-item nav-link <%= title === 'Add Book' ? 'active' : '' %>">
+                    <i class="fa fa-plus-square me-2"></i>Add Book
+                </a>
+            <% } %>
+
+            <% if (user.role == 'librarian') { %>
+                <a href="/manage" class="nav-item nav-link <%= title === 'Manage Books' ? 'active' : '' %>">
+                    <i class="fa fa-book me-2"></i>Manage Books
+                </a>
+            <% } else { %>
+                <a href="/" class="nav-item nav-link <%= title === 'Browse Books' ? 'active' : '' %>">
+                    <i class="fa fa-book-reader me-2"></i>Browse Books
+                </a>
+            <% } %>
+
             <br>
             <a href="/logout" class="nav-item nav-link">
                 <i class="fa fa-sign-out-alt me-2"></i>Log Out

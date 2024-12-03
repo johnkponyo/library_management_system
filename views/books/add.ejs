@@ -1,0 +1,46 @@
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">    
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h4 class="mb-4">Add Book</h4>
+                <form action="/add" method="POST" enctype="multipart/form-data">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="title" required class="form-control" id=""
+                            placeholder="John Doe">
+                        <label for="">Titile</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="author" required class="form-control" id=""
+                            placeholder="Author">
+                        <label for="">Author(s)</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="genre" required class="form-control" id=""
+                            placeholder="genre">
+                        <label for="">Genre</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" required name="description" placeholder="About this book"
+                            id="description" style="height: 150px;"></textarea>
+                        <label for="description">Description</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="cover" required name="available"
+                            aria-label="Floating label select example">
+                            <option value="" disabled selected>Click to select</option>
+                            <option value="1">Available</option>
+                            <option value="2">Coming soon!</option>
+                            <option value="0">Unavailable :(</option>
+                        </select>
+                        <label for="cover">Status</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile"  class="form-label">Book Cover Image</label>
+                        <input class="form-control bg-dark"  required type="file" id="formFile" name="cover" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-success">Add This Book</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

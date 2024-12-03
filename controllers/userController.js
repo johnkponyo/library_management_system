@@ -37,7 +37,7 @@ const userController = {
                         if(req.session.user.role === 'librarian'){
                             res.redirect('/ldashboard')
                         }else if(req.session.user.role === 'user') {
-                            res.redirect('/udashboard')
+                            res.redirect('/')
                         }else {
                             res.redirect('/login');
                         }

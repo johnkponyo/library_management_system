@@ -1,13 +1,15 @@
 const express = require('express');
 const bookController = require('../controllers/bookController');
-const { isAuthenticated, isLibrarian } = require('../middleware/authMiddleware');
+const { isAuthenticated, isLibrarian, isUser } = require('../middleware/authMiddleware');
 const router = express.Router();
+const upload = require('../middleware/uploadMiddleware')
 
 router.get('/', isAuthenticated, bookController.list);
 router.get('/add', isAuthenticated, isLibrarian, bookController.add);
-router.post('/add', isAuthenticated, isLibrarian, bookController.create);
+router.post('/add', isAuthenticated, isLibrarian, upload.single('cover'), bookController.create);
+router.get('/manage', isAuthenticated, isLibrarian, bookController.manage);
 router.get('/edit/:id', isAuthenticated, isLibrarian, bookController.edit);
-router.post('/edit/:id', isAuthenticated, isLibrarian, bookController.update);
+router.post('/edit/:id', isAuthenticated, isLibrarian, upload.single('cover'), bookController.update);
 router.get('/delete/:id', isAuthenticated, isLibrarian, bookController.delete);
 
 module.exports = router;

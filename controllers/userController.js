@@ -13,24 +13,33 @@ const userController = {
 
     //librarian
     ldashboard: (req, res) => {
-        res.render('users/ldashboard', {
-            title: 'Dashboard',
-            user: req.session.user || null
+        Book.getAll((err, books) => {
+            if (err) throw err;
+
+            Book.getAllTransactionHistory((err, data) => {
+                if (err) throw err;
+                const transactionData = data
+                console.log(books)
+                res.render('users/ldashboard', {
+                    title: 'Dashboard',
+                    user: req.session.user || null,
+                    transactionData,
+                    books
+                });
+            })
         });
     },
 
     //user
     udashboard: (req, res) => {
-        let totalBorrowed = 0
-
-        Book.getTotalBorrowedByUser(req.session.user.id, (err, book) => {
+        Book.getUserTransactionHistory(req.session.user.id, (err, data) => {
             if (err) throw err;
-            totalBorrowed = book[0].total_borrowed
+            const transactionData = data
             
             res.render('users/udashboard', {
                 title: 'Dashboard',
                 user: req.session.user || null,
-                totBorrowed: totalBorrowed
+                transactionData
             });
         })
     },

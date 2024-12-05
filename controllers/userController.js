@@ -16,16 +16,18 @@ const userController = {
         Book.getAll((err, books) => {
             if (err) throw err;
 
-            Book.getAllTransactionHistory((err, data) => {
-                if (err) throw err;
-                const transactionData = data
-                console.log(books)
-                res.render('users/ldashboard', {
-                    title: 'Dashboard',
-                    user: req.session.user || null,
-                    transactionData,
-                    books
-                });
+            User.getUsers((err, users) => {
+                Book.getAllTransactionHistory((err, data) => {
+                    if (err) throw err;
+                    const transactionData = data
+                    res.render('users/ldashboard', {
+                        title: 'Dashboard',
+                        user: req.session.user || null,
+                        transactionData,
+                        books,
+                        users,
+                    });
+                })
             })
         });
     },

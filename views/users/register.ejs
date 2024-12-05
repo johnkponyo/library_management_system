@@ -15,9 +15,11 @@
                         <label for="floatingText">Username</label>
                     </div>
                     <div class="form-floating mb-4">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required
+                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{8,}$" 
+                            title="Password must be at least 8 characters long, include uppercase and lowercase letters, a number, and a special character (such as @, $, !, %, *, ?, &, or _).">
                         <label for="floatingPassword">Password</label>
-                    </div>
+                    </div>                    
                     <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Register</button>
                     <% if (error) { %>
                         <p style="color: red;"><%= error %></p>

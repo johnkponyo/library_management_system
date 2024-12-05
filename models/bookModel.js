@@ -111,6 +111,7 @@ const Book = {
         db.query(
                 `SELECT 
                 users.username,
+                books.id AS book_id,
                 books.title AS book_title,
                 books.author AS book_author,
                 books.genre AS book_genre, 
@@ -118,7 +119,8 @@ const Book = {
                 books.available,
                 transactions.borrow_date,
                 transactions.return_date,
-                transactions.status
+                transactions.status,
+                transactions.id AS txn_id
                 FROM books
                 INNER JOIN transactions ON books.id = transactions.book_id
                 INNER JOIN users ON users.id = transactions.user_id
@@ -126,6 +128,14 @@ const Book = {
                 `,  
                 callback
             )
+    },
+
+    returned: (id, callback) => {
+        db.query('UPDATE books SET available = 1 WHERE id = ?', [id], callback);
+    },
+
+    updateTxnReturnStatus: (id, callback) => {
+        db.query('UPDATE transactions SET status = 1 WHERE id = ?', [id], callback);
     },
 };
 

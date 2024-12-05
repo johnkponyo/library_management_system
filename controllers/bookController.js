@@ -63,8 +63,6 @@ const bookController = {
         const borrowDate = HumanFriendlyDate(Date.now()).formattedDate
         const returnDate = HumanFriendlyDate(Date.now() + (7 * 24 * 60 * 60 * 1000)).formattedDate;
 
-        console.log(bookID, userID, borrowDate, returnDate)
-
         Book.setBorrow({bookID, userID, borrowDate, returnDate}, (err) => {
             Book.updateStatus({bookID, val: 0}, (err) => {
                 if (err) throw err;
@@ -73,6 +71,22 @@ const bookController = {
             res.redirect('/');
         });
         
+    },
+
+    returned: (req, res) => {
+        const id = req.params.id
+        const bid = req.params.bid
+        Book.returned(bid, (err) => {
+            if (err){ 
+                throw err
+            } 
+            else {
+                Book.updateTxnReturnStatus(id, (err) => {
+                    if (err) throw err
+                    res.redirect('/ldashboard');
+                })
+            }
+        })
     }
 
 };

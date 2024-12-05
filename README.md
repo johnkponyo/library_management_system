@@ -1,6 +1,6 @@
-![Library Management Banner](./public/img/banner-image.png)
-
 # Library Management System
+
+![Library Management Banner](./public/img/banner-image.png)
 
 ## Table of Contents
 - [Introduction](#introduction)

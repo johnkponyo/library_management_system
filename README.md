@@ -1,3 +1,5 @@
+![Library Management Banner](./public/img/banner-image.png)
+
 # Library Management System
 
 ## Table of Contents
@@ -14,11 +16,10 @@
 The **Library Management System** is a web application designed to help manage books and user interactions in a library setting. It allows administrators to manage book records, users to borrow and return books, and provides a simple interface for library operations.
 
 ### Features
-- **User Management**: Allows users to register, login, and manage their accounts.
-- **Book Management**: Admins can add, edit, list, and manage books in the library.
+- **User Management**: Allows users to register, login; browse, borrow, and search books and also view their personal loan history.
+- **Book Management**: Admins can add, edit, remove, list, and view all transactions and reports in the library.
 - **Authentication**: User login and authentication to protect certain routes.
-- **File Upload**: Admins can upload book covers or other media associated with books.
-
+- **File Upload**: Admins can upload book covers 
 ## Project Structure
 
 The project is structured as follows:
